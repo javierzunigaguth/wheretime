@@ -1,6 +1,8 @@
 package com.example.wheretime
 
 import android.os.Bundle
+import android.widget.Button
+import android.content.Intent
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -58,5 +60,11 @@ class MainActivity : AppCompatActivity() {
         pieChart.centerText = "70:00:00\nHours Logged"
         pieChart.setCenterTextSize(14f)
         pieChart.invalidate()
+
+        val addEntryButton: Button = findViewById(R.id.addEntryButton)
+        addEntryButton.setOnClickListener {
+            val intent = Intent(this, AddEntryActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
