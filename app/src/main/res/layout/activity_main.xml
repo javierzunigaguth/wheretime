@@ -127,4 +127,107 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/goalProgressBar"
         app:layout_constraintBottom_toBottomOf="@id/goalProgressBar" />
+
+    <TextView
+        android:id="@+id/categoriesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goalProgressBar"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/productiveBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="#DDE8F0"
+        android:text="Productive\n90% (63:00:00)"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/unproductiveBox"
+        app:layout_constraintTop_toBottomOf="@id/categoriesLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/unproductiveBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="#E8DDF0"
+        android:text="Unproductive\n10% (7:00:00)"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/productiveBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/productiveBox"
+        android:layout_marginEnd="16dp" />
+
+    <TextView
+        android:id="@+id/subCategoriesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sub Categories"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productiveBox"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/studyingItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="📖 Studying\n(18:00:00)"
+        android:textSize="13sp"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/watchingTvItem"
+        app:layout_constraintTop_toBottomOf="@id/subCategoriesLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/watchingTvItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="📺 Watching TV\n(7:00:00)"
+        android:textSize="13sp"
+        android:padding="8dp"
+        app:layout_constraintStart_toEndOf="@id/studyingItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/studyingItem"
+        android:layout_marginEnd="16dp" />
+
+    <TextView
+        android:id="@+id/sportsItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="🏃 Sports\n(8:00:00)"
+        android:textSize="13sp"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="@id/studyingItem"
+        app:layout_constraintEnd_toStartOf="@id/cookingItem"
+        app:layout_constraintTop_toBottomOf="@id/studyingItem"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/cookingItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="🍳 Cooking\n(21:00:00)"
+        android:textSize="13sp"
+        android:padding="8dp"
+        app:layout_constraintStart_toEndOf="@id/sportsItem"
+        app:layout_constraintEnd_toEndOf="@id/watchingTvItem"
+        app:layout_constraintTop_toTopOf="@id/sportsItem"
+        android:layout_marginBottom="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
