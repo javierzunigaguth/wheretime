@@ -81,6 +81,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
 
+    <View
+        android:id="@+id/chartCenterButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="@id/timeChart"
+        app:layout_constraintBottom_toBottomOf="@id/timeChart"
+        app:layout_constraintStart_toStartOf="@id/timeChart"
+        app:layout_constraintEnd_toEndOf="@id/timeChart" />
+
     <TextView
         android:id="@+id/goalLabel"
         android:layout_width="wrap_content"

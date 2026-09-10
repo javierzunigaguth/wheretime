@@ -3,6 +3,7 @@ package com.example.wheretime
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -45,6 +46,11 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val chartCenterButton: View = findViewById(R.id.chartCenterButton)
+        chartCenterButton.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
         }
 
         val dateText: TextView = findViewById(R.id.dateText)
