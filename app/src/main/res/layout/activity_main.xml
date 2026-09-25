@@ -140,6 +140,18 @@
         app:layout_constraintTop_toTopOf="@id/goalProgressBar"
         app:layout_constraintBottom_toBottomOf="@id/goalProgressBar" />
 
+    <View
+        android:id="@+id/goalSectionButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/goalLabel"
+        app:layout_constraintBottom_toBottomOf="@id/goalProgressBar" />
+
     <TextView
         android:id="@+id/categoriesLabel"
         android:layout_width="wrap_content"

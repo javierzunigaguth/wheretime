@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.wheretime.data.AppDatabase
 import com.example.wheretime.data.Category
 import com.example.wheretime.data.Entry
+import com.example.wheretime.data.Goal
 import com.example.wheretime.data.Subcategory
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -25,6 +26,7 @@ import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.util.Locale
+import kotlinx.coroutines.flow.combine
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,6 +55,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, HistoryActivity::class.java))
         }
 
+        val goalSectionButton: View = findViewById(R.id.goalSectionButton)
+        goalSectionButton.setOnClickListener {
+            startActivity(Intent(this, GoalSetupActivity::class.java))
+        }
+
         val dateText: TextView = findViewById(R.id.dateText)
         val formatter = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault())
         dateText.text = formatter.format(java.util.Date())
@@ -64,15 +71,21 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddEntryActivity::class.java))
         }
 
-        val repository = AppDatabase.getInstance(applicationContext).entryRepository()
+        val entryRepository = AppDatabase.getInstance(applicationContext).entryRepository()
+        val goalRepository = AppDatabase.getInstance(applicationContext).goalRepository()
         val today = LocalDate.now()
         val startOfWeek = today.with(DayOfWeek.MONDAY)
         val endOfWeek = startOfWeek.plusDays(6)
 
         lifecycleScope.launch {
-            repository.getEntriesBetween(startOfWeek, endOfWeek).collectLatest { entries ->
-                updateHomescreen(entries)
-            }
+            entryRepository.getEntriesBetween(startOfWeek, endOfWeek)
+                .combine(goalRepository.getCurrentGoal()) { entries, goal ->
+                    Pair(entries, goal)
+                }
+                .collectLatest { (entries, goal) ->
+                    updateHomescreen(entries)
+                    updateGoalSection(entries, goal)
+                }
         }
     }
 
@@ -141,6 +154,30 @@ class MainActivity : AppCompatActivity() {
         watchingTvItem.text = "📺 Watching TV\n(${formatDuration(minutesBySubcategory[Subcategory.WATCHING_TV] ?: 0)})"
         sportsItem.text = "🏃 Sports\n(${formatDuration(minutesBySubcategory[Subcategory.SPORTS] ?: 0)})"
         cookingItem.text = "🍳 Cooking\n(${formatDuration(minutesBySubcategory[Subcategory.COOKING] ?: 0)})"
+    }
+
+    private fun updateGoalSection(entries: List<Entry>, goal: Goal?) {
+        val goalSubtitle: TextView = findViewById(R.id.goalSubtitle)
+        val goalProgressBar: android.widget.ProgressBar = findViewById(R.id.goalProgressBar)
+        val goalPercentText: TextView = findViewById(R.id.goalPercentText)
+
+        if (goal == null) {
+            goalSubtitle.text = "No goal set — tap to set one"
+            goalProgressBar.progress = 0
+            goalPercentText.text = "0%"
+            return
+        }
+
+        val loggedMinutes = entries
+            .filter { it.subcategory == goal.subcategory }
+            .sumOf { it.totalMinutes }
+
+        val targetMinutes = goal.totalTargetMinutes
+        val percent = if (targetMinutes == 0) 0 else ((loggedMinutes * 100) / targetMinutes).coerceAtMost(100)
+
+        goalSubtitle.text = "${goal.subcategory.displayName} (${formatDuration(targetMinutes)})"
+        goalProgressBar.progress = percent
+        goalPercentText.text = "$percent%"
     }
 
     private fun formatDuration(totalMinutes: Int): String {
