@@ -1,6 +1,7 @@
 package com.example.wheretime
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -83,6 +84,16 @@ class AddEntryActivity : AppCompatActivity() {
         selectedMonth = calendar.get(Calendar.MONTH)
         selectedDay = calendar.get(Calendar.DAY_OF_MONTH)
         updateDateField(dateField)
+
+        val settingsIcon: Button = findViewById(R.id.settingsIcon)
+        settingsIcon.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+        val profileIcon: Button = findViewById(R.id.profileIcon)
+        profileIcon.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
 
         dateField.setOnClickListener {
             DatePickerDialog(

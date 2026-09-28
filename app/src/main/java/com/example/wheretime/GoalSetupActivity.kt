@@ -1,5 +1,6 @@
 package com.example.wheretime
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -54,6 +55,16 @@ class GoalSetupActivity : AppCompatActivity() {
         val durationError: TextView = findViewById(R.id.durationError)
         val hoursInput: EditText = findViewById(R.id.hoursInput)
         val setGoalButton: Button = findViewById(R.id.setGoalButton)
+
+        val settingsIcon: Button = findViewById(R.id.settingsIcon)
+        settingsIcon.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+        val profileIcon: Button = findViewById(R.id.profileIcon)
+        profileIcon.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
 
         setGoalButton.setOnClickListener {
             subcategoryError.visibility = TextView.GONE

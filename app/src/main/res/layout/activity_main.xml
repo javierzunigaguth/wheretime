@@ -30,11 +30,11 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/titleText"
-        app:layout_constraintEnd_toStartOf="@id/settings"
+        app:layout_constraintEnd_toStartOf="@id/settingsIcon"
         app:layout_constraintTop_toTopOf="@id/titleText" />
 
     <Button
-        android:id="@+id/settings"
+        android:id="@+id/settingsIcon"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,11 +44,11 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/titleText"
-        app:layout_constraintEnd_toStartOf="@id/profile"
+        app:layout_constraintEnd_toStartOf="@id/profileIcon"
         app:layout_constraintTop_toTopOf="@id/titleText" />
 
     <Button
-        android:id="@+id/profile"
+        android:id="@+id/profileIcon"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

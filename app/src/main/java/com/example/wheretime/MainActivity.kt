@@ -78,6 +78,16 @@ class MainActivity : AppCompatActivity() {
         val startOfWeek = today.with(DayOfWeek.MONDAY)
         val endOfWeek = startOfWeek.plusDays(6)
 
+        val settingsIcon: Button = findViewById(R.id.settingsIcon)
+        settingsIcon.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+        val profileIcon: Button = findViewById(R.id.profileIcon)
+        profileIcon.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
         lifecycleScope.launch {
             entryRepository.getEntriesBetween(startOfWeek, endOfWeek)
                 .combine(goalRepository.getCurrentGoal()) { entries, goal ->

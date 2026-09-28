@@ -1,5 +1,6 @@
 package com.example.wheretime
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -42,6 +43,16 @@ class HistoryActivity : AppCompatActivity() {
         emptyStateText = findViewById(R.id.emptyStateText)
 
         val repository = AppDatabase.getInstance(applicationContext).entryRepository()
+
+        val settingsIcon: Button = findViewById(R.id.settingsIcon)
+        settingsIcon.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+        val profileIcon: Button = findViewById(R.id.profileIcon)
+        profileIcon.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
 
         lifecycleScope.launch {
             repository.getAllEntries().collectLatest { entries ->
