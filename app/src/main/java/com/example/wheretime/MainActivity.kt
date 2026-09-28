@@ -16,6 +16,7 @@ import com.example.wheretime.data.Category
 import com.example.wheretime.data.Entry
 import com.example.wheretime.data.Goal
 import com.example.wheretime.data.Subcategory
+import com.example.wheretime.logic.ProgressCalculator
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -90,11 +91,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateHomescreen(entries: List<Entry>) {
-        val minutesBySubcategory: Map<Subcategory, Int> = entries
-            .groupBy { it.subcategory }
-            .mapValues { (_, entriesForSub) -> entriesForSub.sumOf { it.totalMinutes } }
-
-        val totalMinutes = minutesBySubcategory.values.sum()
+        val minutesBySubcategory = ProgressCalculator.minutesBySubcategory(entries)
+        val totalMinutes = ProgressCalculator.totalMinutes(entries)
 
         if (totalMinutes == 0) {
             pieChart.clear()
@@ -120,17 +118,14 @@ class MainActivity : AppCompatActivity() {
             pieChart.isDrawHoleEnabled = true
             pieChart.holeRadius = 58f
             pieChart.transparentCircleRadius = 61f
-            pieChart.centerText = formatDuration(totalMinutes) + "\nHours Logged"
+            pieChart.centerText = ProgressCalculator.formatDuration(totalMinutes) + "\nHours Logged"
             pieChart.setCenterTextSize(14f)
             pieChart.invalidate()
         }
 
-        val productiveMinutes = minutesBySubcategory
-            .filterKeys { it.category == Category.PRODUCTIVE }
-            .values.sum()
-        val unproductiveMinutes = minutesBySubcategory
-            .filterKeys { it.category == Category.UNPRODUCTIVE }
-            .values.sum()
+        val minutesByCategory = ProgressCalculator.minutesByCategory(entries)
+        val productiveMinutes = minutesByCategory[Category.PRODUCTIVE] ?: 0
+        val unproductiveMinutes = minutesByCategory[Category.UNPRODUCTIVE] ?: 0
 
         val productiveBox: TextView = findViewById(R.id.productiveBox)
         val unproductiveBox: TextView = findViewById(R.id.unproductiveBox)
@@ -141,8 +136,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             val productivePercent = (productiveMinutes * 100) / totalMinutes
             val unproductivePercent = (unproductiveMinutes * 100) / totalMinutes
-            productiveBox.text = "Productive\n$productivePercent% (${formatDuration(productiveMinutes)})"
-            unproductiveBox.text = "Unproductive\n$unproductivePercent% (${formatDuration(unproductiveMinutes)})"
+            productiveBox.text = "Productive\n$productivePercent% (${ProgressCalculator.formatDuration(productiveMinutes)})"
+            unproductiveBox.text = "Unproductive\n$unproductivePercent% (${ProgressCalculator.formatDuration(unproductiveMinutes)})"
         }
 
         val studyingItem: TextView = findViewById(R.id.studyingItem)
@@ -150,10 +145,10 @@ class MainActivity : AppCompatActivity() {
         val sportsItem: TextView = findViewById(R.id.sportsItem)
         val cookingItem: TextView = findViewById(R.id.cookingItem)
 
-        studyingItem.text = "📖 Studying\n(${formatDuration(minutesBySubcategory[Subcategory.STUDYING] ?: 0)})"
-        watchingTvItem.text = "📺 Watching TV\n(${formatDuration(minutesBySubcategory[Subcategory.WATCHING_TV] ?: 0)})"
-        sportsItem.text = "🏃 Sports\n(${formatDuration(minutesBySubcategory[Subcategory.SPORTS] ?: 0)})"
-        cookingItem.text = "🍳 Cooking\n(${formatDuration(minutesBySubcategory[Subcategory.COOKING] ?: 0)})"
+        studyingItem.text = "📖 Studying\n(${ProgressCalculator.formatDuration(minutesBySubcategory[Subcategory.STUDYING] ?: 0)})"
+        watchingTvItem.text = "📺 Watching TV\n(${ProgressCalculator.formatDuration(minutesBySubcategory[Subcategory.WATCHING_TV] ?: 0)})"
+        sportsItem.text = "🏃 Sports\n(${ProgressCalculator.formatDuration(minutesBySubcategory[Subcategory.SPORTS] ?: 0)})"
+        cookingItem.text = "🍳 Cooking\n(${ProgressCalculator.formatDuration(minutesBySubcategory[Subcategory.COOKING] ?: 0)})"
     }
 
     private fun updateGoalSection(entries: List<Entry>, goal: Goal?) {
@@ -168,21 +163,11 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val loggedMinutes = entries
-            .filter { it.subcategory == goal.subcategory }
-            .sumOf { it.totalMinutes }
+        val percent = ProgressCalculator.goalProgressPercent(entries, goal)
 
-        val targetMinutes = goal.totalTargetMinutes
-        val percent = if (targetMinutes == 0) 0 else ((loggedMinutes * 100) / targetMinutes).coerceAtMost(100)
-
-        goalSubtitle.text = "${goal.subcategory.displayName} (${formatDuration(targetMinutes)})"
+        goalSubtitle.text = "${goal.subcategory.displayName} (${ProgressCalculator.formatDuration(goal.totalTargetMinutes)})"
         goalProgressBar.progress = percent
         goalPercentText.text = "$percent%"
     }
 
-    private fun formatDuration(totalMinutes: Int): String {
-        val hours = totalMinutes / 60
-        val minutes = totalMinutes % 60
-        return String.format(Locale.getDefault(), "%d:%02d:00", hours, minutes)
-    }
 }
