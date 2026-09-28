@@ -1,7 +1,6 @@
 package com.example.wheretime
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,6 +15,7 @@ import com.example.wheretime.data.Category
 import com.example.wheretime.data.Entry
 import com.example.wheretime.data.Goal
 import com.example.wheretime.data.Subcategory
+import androidx.core.graphics.toColorInt
 import com.example.wheretime.logic.ProgressCalculator
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -33,11 +33,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var pieChart: PieChart
     private val subcategoryColors = mapOf(
-        Subcategory.STUDYING to Color.parseColor("#A8D5BA"),
-        Subcategory.WORKING to Color.parseColor("#F4A6A6"),
-        Subcategory.SPORTS to Color.parseColor("#F7D9A0"),
-        Subcategory.COOKING to Color.parseColor("#A9D6E5"),
-        Subcategory.WATCHING_TV to Color.parseColor("#D8BFD8")
+        Subcategory.STUDYING to "#A8D5BA".toColorInt(),
+        Subcategory.WORKING to "#F4A6A6".toColorInt(),
+        Subcategory.SPORTS to "#F7D9A0".toColorInt(),
+        Subcategory.COOKING to "#A9D6E5".toColorInt(),
+        Subcategory.WATCHING_TV to "#D8BFD8".toColorInt()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

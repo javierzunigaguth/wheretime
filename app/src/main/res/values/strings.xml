@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">WhereTime</string>
+    <string name="wheretime">WhereTime</string>
+    <string name="goal">Goal</string>
+    <string name="studying_24_00_00">Studying (24:00:00)</string>
+    <string name="_75">75%</string>
+    <string name="categories">Categories</string>
+    <string name="productive_n90_63_00_00">Productive\n90% (63:00:00)</string>
+    <string name="unproductive_n10_7_00_00">Unproductive\n10% (7:00:00)</string>
+    <string name="sub_categories">Sub Categories</string>
+    <string name="history">History</string>
+    <string name="no_entries_yet">No entries yet</string>
+    <string name="profile">Profile</string>
+    <string name="profile_coming_soon">Profile coming soon</string>
+    <string name="settings">Settings</string>
+    <string name="settings_coming_soon">Settings coming soon</string>
+    <string name="set_your_current_goal">Set your current Goal</string>
+    <string name="hours_per_week">Hours per Week</string>
+    <string name="set_to_current_goal">Set to current Goal</string>
+    <string name="add_a_new_entry">Add a new entry</string>
+    <string name="date">Date</string>
+    <string name="hours">Hours</string>
+    <string name="minutes">Minutes</string>
+    <string name="add_entry">Add entry</string>
+    <string name="hours_hint">Hours</string>
+    <string name="minutes_hint">Minutes</string>
 </resources>

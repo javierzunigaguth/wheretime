@@ -8,6 +8,6 @@ enum class Subcategory(val category: Category, val displayName: String) {
     WATCHING_TV(Category.UNPRODUCTIVE, "Watching TV");
 
     companion object {
-        fun all(): List<Subcategory> = values().toList()
+        fun all(): List<Subcategory> = entries.toList()
     }
 }

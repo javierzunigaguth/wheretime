@@ -18,16 +18,16 @@
         android:minHeight="0dp"
         android:text="←"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/settingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="@string/settings"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/backButton"
@@ -38,7 +38,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Settings coming soon"
+        android:text="@string/settings_coming_soon"
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp"
         android:gravity="center"

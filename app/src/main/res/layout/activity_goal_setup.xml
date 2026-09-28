@@ -32,16 +32,16 @@
         android:minHeight="0dp"
         android:text="←"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/goalSetupTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Set your current Goal"
+        android:text="@string/set_your_current_goal"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/backButton"
@@ -104,7 +104,7 @@
         android:id="@+id/hoursLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hours per Week"
+        android:text="@string/hours_per_week"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/glLeft"
@@ -142,7 +142,7 @@
         android:id="@+id/setGoalButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Set to current Goal"
+        android:text="@string/set_to_current_goal"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:backgroundTint="#808080"

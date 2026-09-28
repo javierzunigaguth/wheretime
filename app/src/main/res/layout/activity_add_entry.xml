@@ -35,13 +35,13 @@
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/addEntryTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Add a new entry"
+        android:text="@string/add_a_new_entry"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -127,7 +127,7 @@
         android:id="@+id/dateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date"
+        android:text="@string/date"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/glLeft"
@@ -166,7 +166,7 @@
         android:id="@+id/hoursLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hours"
+        android:text="@string/hours"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/glLeft"
@@ -177,7 +177,7 @@
         android:id="@+id/minutesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Minutes"
+        android:text="@string/minutes"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@id/glRight"
@@ -197,7 +197,8 @@
         app:layout_constraintEnd_toStartOf="@id/minutesInput"
         app:layout_constraintTop_toBottomOf="@id/hoursLabel"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="16dp"
+        android:hint="@string/hours_hint"/>
 
     <EditText
         android:id="@+id/minutesInput"
@@ -211,7 +212,8 @@
         android:autofillHints="minutes"
         app:layout_constraintStart_toEndOf="@id/hoursInput"
         app:layout_constraintEnd_toEndOf="@id/glRight"
-        app:layout_constraintTop_toTopOf="@id/hoursInput" />
+        app:layout_constraintTop_toTopOf="@id/hoursInput"
+        android:hint="@string/minutes_hint" />
 
     <TextView
         android:id="@+id/durationError"
@@ -229,7 +231,7 @@
         android:id="@+id/addEntryButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Add entry"
+        android:text="@string/add_entry"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:backgroundTint="#808080"
